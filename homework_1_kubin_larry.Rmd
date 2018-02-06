@@ -39,3 +39,25 @@ region_col <- WorldCities$region
 unique(region_col)
 ```
 
+## Question 3 Answer: Show unique countries using tidy pipe operators
+
+```{r}
+WorldCities %>% select(country) %>% unique()
+```
+
+### Visualize population data as a histogram
+
+```{r}
+WorldCities %>% ggplot(aes(x = population)) +
+geom_histogram()
+```
+
+
+## Qeustion 4 Answer: Add labels, a title, and theme
+
+```{r}
+WorldCities %>% ggplot(aes(x = population)) +
+geom_histogram() + xlab('City Population') + ylab('Country') + ggtitle('City population by Country') + theme_bw()
+
+```
+
