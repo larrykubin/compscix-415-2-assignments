@@ -8,3 +8,34 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 My Github repository for my assignments can be found at this URL: [https://github.com/larrykubin/compscix-415-2-assignments](https://github.com/larrykubin/compscix-415-2-assignments)
+
+```{r load_packages, warning=FALSE, message=FALSE}
+library(mdsr)
+library(tidyverse)
+```
+
+## Question 1 Answer: Number of observations in the dataset
+
+There are 23,018 observations in the dataset. This is found by using _glimpse_, which presents a summary of the dataset.
+
+```{r}
+glimpse(WorldCities)
+```
+
+## Question 2 Answer: Show unique regions in the dataset
+
+Below is a list of the unique countries in the first 200 records of the dataset.
+
+```{r}
+WorldCitiesHead <- head(WorldCities, 200)
+country_col <- WorldCitiesHead$country
+unique(country_col)
+```
+
+Below is a list of the unique regions in the entire dataset. 
+
+```{r}
+region_col <- WorldCities$region
+unique(region_col)
+```
+
