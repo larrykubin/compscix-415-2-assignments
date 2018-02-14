@@ -1,0 +1,166 @@
+---
+title: "Homework 2"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+## 3.2.4 Exercises
+
+### 1. Run ggplot(data = mpg). What do you see?
+
+There is an empty plot since no aesthetic has been defined. 
+
+```{r}
+library(tidyverse)
+
+ggplot(data = mpg)
+```
+
+### 2. How many rows are in mtcars? How many columns?
+
+There are 32 rows and 11 columns in mtcars.
+
+```{r}
+mtcars
+```
+
+### 3. What does the drv variable describe?
+
+The drv variable describes whether the vehicle has front-wheel drive, read wheel drive, or 4 wheel drive.
+
+```{r}
+?mpg
+```
+
+### 4. Make a scatterplot of _hwy_ vs _cyl_.
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = cyl, y = hwy))
+```
+
+
+### 5. What happens if you make a scatterplot of _class_ versus _drv_. Why is the plot not useful?
+
+This graph is not useful since the drive type is simply a feature of each drive class. There is no correlation in observations here to derive any useful insight from.
+
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class))
+```
+
+## 3.3.1 Exercises
+
+### 1. What’s gone wrong with this code? Why are the points not blue?
+
+The string "blue" is set inside of the aes() function. To manually assign "blue", the color should be set as an argument of the geom function.
+
+### 2. Which variables in mpg are categorical? Which variables are continuous?
+
+Categorical - fuel type, class, drive type, transmission type, model, year
+Continuous - highway miles per gallon, city miles per gallon, engine displacement
+
+You can display the dataframe values and help file to tell which variables are "types" and which are sets of continuous values.
+
+### 3. Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?
+
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class, color=hwy))
+```
+
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class, size=hwy))
+```
+
+For a continuous variable, the color and shape is a spectrum and is harder to distinguish and get meaning from. For a shape, a continuous variable is not allowed.
+
+### 4. What happens if you map the same variable to multiple aesthetics?
+
+You can assign multiple aesthetics to transmission type.
+
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class, size=trans, color=trans))
+```
+
+5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
+
+The stroke aesthetic controls the thickness of shapes that have a border.
+
+6. What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)?
+
+This will split the colors based on the expressions value. So in the case of a boolean expression, it would split the dataset into two colors.
+
+```{r}
+ggplot(data = mpg) + geom_point(mapping = aes(x = drv, y = class, color=displ < 5))
+```
+
+## Exercises 3.5.1
+
+### 4. Take the first faceted plot in this section:
+
+What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?
+
+Facetting allows you to see the points for a particular variable on its own subplot. This can make it easier to see values that may overlap. In a larger dataset, this would be more valuable if there are many values close together.
+
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+```
+
+
+
+### 5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol argument?
+
+nrow and ncol specify the number of rows and the number of columns respectively. facet_grid rows and columns are defined by two discrete facetting variables.
+
+```{r}
+?facet_wrap
+```
+
+## 3.6.1 Exercises
+
+### 1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+
+You can use geom_smooth() to draw a line chart, geom_boxplot() to draw a boxplot, geom_bar to draw a histogram, and geom_area() to draw an area chart.
+
+### 2. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.
+
+This code will draw a scatter plot with multiple lines with colors for each attribute (displ, hwy, and drv).
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+
+### 3. What does show.legend = FALSE do? What happens if you remove it?
+Why do you think I used it earlier in the chapter?
+
+show.legend = FALSE will hide the legend. By default, a legend is added. The legend provides additional context as to what colors or shapes mean.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+```
+
+### 4. What does the se argument to geom_smooth() do?
+
+The _se_ argument displays the confidence interval around the line.
+
+### 5. Will these two graphs look different? Why/why not?
+
+They look the same because both geometries use the same aesthetic, they are just defined in different places.
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+```{r}
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+```
