@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ### 3.8.1 What is the problem with this plot? How could you improve it?
@@ -9,6 +11,7 @@ When running summary() on the dataset, we see there are 234 items in the mpg dat
 
 ```{r}
 library(tidyverse)
+library(nycflights13)
 
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
   geom_point()
