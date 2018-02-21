@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: 
+  html_notebook: 
+    toc: yes
+---
+
+# Heading Level 1
+
+Here is level 1.
+
+## Heading Level 2
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(tidyverse)
+
+ggplot(data = mpg) + geom_bar(mapping = aes(x = drv, fill = class), position = "dodge") + xlab("Drive of Vehicle") + coord_flip()
+```
+
+### Let's try a Graph Here
+
+```{r}
+
+ggplot(data = diamonds) + geom_bar(mapping = aes(x = carat), binwidth=0.15, color="black", fill="green", position="dodge") + xlab("Carat of diamond") + coord_flip()
+```
