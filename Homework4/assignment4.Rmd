@@ -12,7 +12,7 @@ library(tidyverse)
 
 ### 1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).
 
-In a tibble, all observations have a data typ and the output is limited to 10 rows per page. Also R Studio will show tbl_df instead of data.frame.
+In a tibble, all observations have a data typ and the output is limited to 10 rows per page. Also R Studio will show tbl_df instead of data.frame. 
 
 ```{r}
 print(mtcars)
