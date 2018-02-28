@@ -1,0 +1,102 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+## 10.5
+
+### 1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).
+
+In a tibble, all observations have a data typ and the output is limited to 10 rows per page. Also R Studio will show tbl_df instead of data.frame.
+
+```{r}
+print(mtcars)
+
+print(mpg)
+```
+
+### 2. Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?
+
+
+```{r}
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+df[, "xyz"]
+df[, c("abc", "xyz")]
+```
+
+### 3. If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?
+
+You can extract the name of a variable using subsetting as below:
+
+```{r}
+df <- tibble(
+  x = 1,
+  y = 2
+)
+
+df$x
+
+```
+
+
+### 6. What option controls how many additional column names are printed at the footer of a tibble?
+
+You can control this using the width option.
+
+## 12.3.3
+
+### 2. Why does this code fail?
+
+The data is not tidy. The years should not be columns, they should be in the observations list. 
+
+```{r}
+table4a %>% 
+  gather(1999, 2000, key = "year", value = "cases")
+
+```
+
+```{r}
+table4a
+```
+
+### 3. Why does spreading this tibble fail? How could you add a new column to fix the problem?
+
+
+```{r}
+people <- tribble(
+  ~name,             ~key,    ~value, ~year,
+  #-----------------|--------|------
+  "Phillip Woods",   "age",       45, 1999,
+  "Phillip Woods",   "height",   186, 1999,
+  "Phillip Woods",   "age",       50, 2000,
+  "Jessica Cordero", "age",       37, 1999,
+  "Jessica Cordero", "height",   156, 1999
+)
+
+people %>% spread(~name, ~key, ~value)
+```
+
+
+## 12.4.3
+
+### 1. What do the extra and fill arguments do in separate()? Experiment with the various options for the following two toy datasets.
+
+```{r}
+tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>% 
+  separate(x, c("one", "two", "three"), extra="drop")
+
+tibble(x = c("a,b,c", "d,e", "f,g,i")) %>% 
+  separate(x, c("one", "two", "three"))
+```
+
+### 2. Both unite() and separate() have a remove argument. What does it do? Why would you set it to FALSE?
+
+The remove argument removes input columns from the output data frame. You might set it to FALSE because you want to see the inputs next to the output.
+
+
