@@ -47,6 +47,8 @@ gather(), spread()
 
 #### Importing/exporting data (note that readRDS and saveRDS are base R functions)
 
+read_csv(), read_delim()
+
 ## R Basics
 
 ### 1. Fix this code with the fewest number of changes possible so it works:
@@ -78,8 +80,78 @@ my_vector
 
 ### Import rail_trail.txt
 
-hello
+```{r}
+library(tidyverse)
 
-### Export the file into an R-specific format
+rail_trail <- read_delim("rail_trail.txt", "|")
+glimpse(rail_trail)
+```
 
-here we go
+
+### Export the file into an R-specific format and reload it.
+
+```{r}
+saveRDS(rail_trail, file = "rail_trail.rds")
+
+rail_trail_rds = readRDS(file = "rail_trail.rds")
+
+glimpse(rail_trail_rds)
+```
+
+## Visualization
+
+### 1. Critique this graphic: give only three examples of what is wrong with this graphic. Be concise.
+
+--
+
+### 2. Reproduce this graphic using the diamonds data set.
+
+--
+
+### 3. The previous graphic is not very useful. We can make it much more useful by changing one thing about it. Make the change and plot it again.
+
+
+
+## Data munging and wrangling (6 points)
+1. Is this data “tidy”? If yes, leave it alone and go to the next problem. If no, make it tidy. Note: this
+data set is called table2 and is available in the tidyverse package. It should be ready for you to use
+after you’ve loaded the tidyverse package.
+table2
+## # A tibble: 12 x 4
+## country year type count
+## <chr> <int> <chr> <int>
+## 1 Afghanistan 1999 cases 745
+## 2 Afghanistan 1999 population 19987071
+## 3 Afghanistan 2000 cases 2666
+## 4 Afghanistan 2000 population 20595360
+## 5 Brazil 1999 cases 37737
+## 6 Brazil 1999 population 172006362
+## 7 Brazil 2000 cases 80488
+## 8 Brazil 2000 population 174504898
+## 9 China 1999 cases 212258
+## 10 China 1999 population 1272915272
+## 11 China 2000 cases 213766
+5
+## 12 China 2000 population 1280428583
+2. Create a new column in the diamonds data set called price_per_carat that shows the price of each
+diamond per carat (hint: divide). Only show me the code, not the output.
+3. For each cut of diamond in the diamonds data set, how many diamonds, and what proportion, have a
+price > 10000 and a carat < 1.5? There are several ways to get to an answer, but your solution must
+use the data wrangling verbs from the tidyverse in order to get credit.
+• Do the results make sense? Why?
+• Do we need to be wary of any of these numbers? Why?
+
+## EDA
+
+Take a look at the txhousing data set that is included with the ggplot2 package and answer these questions:
+1. During what time period is this data from?
+2. How many cities are represented?
+3. Which city, month and year had the highest number of sales?
+4. What kind of relationship do you think exists between the number of listings and the number of sales?
+Check your assumption and show your work.
+5. What proportion of sales is missing for each city?
+6. Looking at only the cities and months with greater than 500 sales:
+• Are the distributions of the median sales price (column name median), when grouped by city,
+different? The same? Show your work.
+• Any cities that stand out that you’d want to investigate further?
+• Why might we want to filter out all cities and months with sales less than 500?
