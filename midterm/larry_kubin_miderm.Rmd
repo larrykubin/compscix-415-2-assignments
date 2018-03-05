@@ -2,29 +2,84 @@
 title: "COMPSCIX 415.2 Homework 5/Midterm"
 author: Larry Kubin
 date: March 4, 2018
-output: html_document
+output: 
+  html_document: 
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Midterm
+## The tidyverse packages
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+### 1. Can you name which package is associated with each task below?
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#### Plotting
 
-```{r cars}
-summary(cars)
+ggplot2
+
+#### Data munging/wrangling
+
+dplyr
+
+#### Reshaping (speading and gathering) data
+
+tidyr
+
+#### Importing/exporting data
+
+readr
+
+### 2. Now can you name two functions that you’ve used from each package that you listed above for these tasks?
+
+#### Plotting
+
+ggplot(), aes()
+
+#### Data munging/wrangling
+
+select(), filter()
+
+#### Reshaping data
+
+gather(), spread()
+
+#### Importing/exporting data (note that readRDS and saveRDS are base R functions)
+
+## R Basics
+
+### 1. Fix this code with the fewest number of changes possible so it works:
+
+The exclamation point was not a valid character in a variable name. A variable name can only consist of letters, numbers, and the dot and and underscore characters.
+
+```{r}
+My_data.name___is.too00ooLong <- c( 1 , 2 , 3 )
 ```
 
-## Including Plots
+### 2. Fix this code so it works:
 
-You can also embed plots, for example:
+One of the values was missing a quotation mark. Also, vectors are created using the c() function. There was a capital C used to create the function, which caused an error.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+my_string <- c('has', 'an', 'error', 'in', 'it')
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### 3. Look at the code below and comment on what happened to the values in the vector.
+
+A vector can not have multiple types. Since a string is the most complex type in the vector, all values in the vector are coerced to strings.
+
+```{r}
+my_vector <- c(1, 2, '3', '4', 5)
+my_vector
+```
+
+## Data Import / Export
+
+### Import rail_trail.txt
+
+hello
+
+### Export the file into an R-specific format
+
+here we go
