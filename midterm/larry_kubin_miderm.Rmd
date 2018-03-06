@@ -102,7 +102,11 @@ glimpse(rail_trail_rds)
 
 ### 1. Critique this graphic: give only three examples of what is wrong with this graphic. Be concise.
 
---
+#### 1. The size of the circles is not proportional to the percentage. The area of the 79 percent circle is much more than 5x the size of the 16 percent circle.
+
+#### 2. Side-by-side circles do not clearly express percentage data. This could have been easily expressed by a table or a stacked bar chart.
+
+#### 3. The numbers should have a percentage sign next to them. Without it, they look like quantity/counts at first glance.
 
 ### 2. Reproduce this graphic using the diamonds data set.
 
@@ -113,45 +117,82 @@ glimpse(rail_trail_rds)
 
 
 ## Data munging and wrangling (6 points)
-1. Is this data “tidy”? If yes, leave it alone and go to the next problem. If no, make it tidy. Note: this
-data set is called table2 and is available in the tidyverse package. It should be ready for you to use
-after you’ve loaded the tidyverse package.
+
+#### 1. Is this data “tidy”? If yes, leave it alone and go to the next problem. If no, make it tidy. Note: this data set is called table2 and is available in the tidyverse package. It should be ready for you to use after you’ve loaded the tidyverse package.
+
+```{r}
 table2
-## # A tibble: 12 x 4
-## country year type count
-## <chr> <int> <chr> <int>
-## 1 Afghanistan 1999 cases 745
-## 2 Afghanistan 1999 population 19987071
-## 3 Afghanistan 2000 cases 2666
-## 4 Afghanistan 2000 population 20595360
-## 5 Brazil 1999 cases 37737
-## 6 Brazil 1999 population 172006362
-## 7 Brazil 2000 cases 80488
-## 8 Brazil 2000 population 174504898
-## 9 China 1999 cases 212258
-## 10 China 1999 population 1272915272
-## 11 China 2000 cases 213766
-5
-## 12 China 2000 population 1280428583
-2. Create a new column in the diamonds data set called price_per_carat that shows the price of each
-diamond per carat (hint: divide). Only show me the code, not the output.
-3. For each cut of diamond in the diamonds data set, how many diamonds, and what proportion, have a
-price > 10000 and a carat < 1.5? There are several ways to get to an answer, but your solution must
-use the data wrangling verbs from the tidyverse in order to get credit.
-• Do the results make sense? Why?
-• Do we need to be wary of any of these numbers? Why?
+```
+
+#### 2. Create a new column in the diamonds data set called price_per_carat that shows the price of each diamond per carat (hint: divide). Only show me the code, not the output.
+
+yo
+
+#### 3. For each cut of diamond in the diamonds data set, how many diamonds, and what proportion, have a price > 10000 and a carat < 1.5? There are several ways to get to an answer, but your solution must use the data wrangling verbs from the tidyverse in order to get credit.
+
+##### a. Do the results make sense? Why?
+
+
+##### b. Do we need to be wary of any of these numbers? Why?
 
 ## EDA
 
 Take a look at the txhousing data set that is included with the ggplot2 package and answer these questions:
-1. During what time period is this data from?
-2. How many cities are represented?
-3. Which city, month and year had the highest number of sales?
-4. What kind of relationship do you think exists between the number of listings and the number of sales?
-Check your assumption and show your work.
-5. What proportion of sales is missing for each city?
-6. Looking at only the cities and months with greater than 500 sales:
-• Are the distributions of the median sales price (column name median), when grouped by city,
-different? The same? Show your work.
-• Any cities that stand out that you’d want to investigate further?
-• Why might we want to filter out all cities and months with sales less than 500?
+
+```{r}
+glimpse(txhousing)
+```
+
+#### 1. During what time period is this data from?
+
+The time period is January 2000 through July 2015.
+
+```{r}
+# get min month for min year
+min(txhousing$year)
+min_year_houses <- filter(txhousing, year == 2000)
+min(min_year_houses$month);
+
+# get max month for max year
+max(txhousing$year)
+max_year_houses <- filter(txhousing, year == 2015)
+max(max_year_houses$month);
+```
+
+#### 2. How many cities are represented?
+
+There are 46 distinct cities represented.
+
+```{r}
+distinct(txhousing, city)
+```
+
+#### 3. Which city, month and year had the highest number of sales?
+
+Houston had the greatest number of sales in July of 2015.
+
+```{r}
+ordered <- arrange(txhousing, desc(sales))
+print(ordered)
+```
+
+#### 4. What kind of relationship do you think exists between the number of listings and the number of sales? Check your assumption and show your work.
+
+If there are more listings there should be more sales. We can see this is the case by creating a simple scatterplot of listings vs. sales. You can see as the number of listings goes up on the X axis, the number of sales trends upwards on the Y axis.
+
+
+```{r}
+ggplot(txhousing, aes(x=listings, y=sales)) + geom_point()
+```
+
+#### 5. What proportion of sales is missing for each city?
+
+bingo
+
+#### 6. Looking at only the cities and months with greater than 500 sales:
+
+##### a. Are the distributions of the median sales price (column name median), when grouped by city, different? The same? Show your work.
+
+##### b. Any cities that stand out that you’d want to investigate further?
+
+##### c. Why might we want to filter out all cities and months with sales less than 500?
