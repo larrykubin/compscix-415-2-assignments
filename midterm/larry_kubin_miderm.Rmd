@@ -120,13 +120,17 @@ glimpse(rail_trail_rds)
 
 #### 1. Is this data “tidy”? If yes, leave it alone and go to the next problem. If no, make it tidy. Note: this data set is called table2 and is available in the tidyverse package. It should be ready for you to use after you’ve loaded the tidyverse package.
 
+The data is not tidy. Cases and population need to be there own columns with only their own values. This can be accomplished using the spread() function.
+
 ```{r}
-table2
+spread(table2, type, count)
 ```
 
 #### 2. Create a new column in the diamonds data set called price_per_carat that shows the price of each diamond per carat (hint: divide). Only show me the code, not the output.
 
-yo
+```{r}
+diamonds$price_per_carat <- diamonds$price / diamonds$carat
+```
 
 #### 3. For each cut of diamond in the diamonds data set, how many diamonds, and what proportion, have a price > 10000 and a carat < 1.5? There are several ways to get to an answer, but your solution must use the data wrangling verbs from the tidyverse in order to get credit.
 
