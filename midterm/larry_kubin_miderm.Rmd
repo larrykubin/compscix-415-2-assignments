@@ -11,6 +11,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[Github Link](https://github.com/larrykubin/compscix-415-2-assignments)
+
 ## The tidyverse packages
 
 ### 1. Can you name which package is associated with each task below?
