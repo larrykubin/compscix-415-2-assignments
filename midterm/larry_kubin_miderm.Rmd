@@ -110,11 +110,17 @@ glimpse(rail_trail_rds)
 
 ### 2. Reproduce this graphic using the diamonds data set.
 
---
+```{r}
+
+ggplot(data = diamonds, mapping = aes(x = reorder(cut, carat), y = carat)) + geom_boxplot() + xlab("CARAT OF DIAMOND") + ylab("CUT OF DIAMOND") + coord_flip()
+```
 
 ### 3. The previous graphic is not very useful. We can make it much more useful by changing one thing about it. Make the change and plot it again.
 
+```{r}
 
+ggplot(data = diamonds, mapping = aes(x = reorder(cut, carat), y = carat), position="dodge") + geom_boxplot() + xlab("CARAT OF DIAMOND") + ylab("CUT OF DIAMOND") + coord_flip()
+```
 
 ## Data munging and wrangling (6 points)
 
@@ -136,8 +142,19 @@ diamonds$price_per_carat <- diamonds$price / diamonds$carat
 
 ##### a. Do the results make sense? Why?
 
+834 diamonds and 1.5%
+
+```{r}
+
+nrow(filter(diamonds, price > 10000 & carat < 1.5))
+(nrow(filter(diamonds, price > 10000 & carat < 1.5)) / nrow(diamonds)) * 100
+```
 
 ##### b. Do we need to be wary of any of these numbers? Why?
+
+```{r}
+filter(diamonds, price > 10000 & carat < 1.5)
+```
 
 ## EDA
 
@@ -191,12 +208,27 @@ ggplot(txhousing, aes(x=listings, y=sales)) + geom_point()
 
 #### 5. What proportion of sales is missing for each city?
 
-bingo
+```{r}
+filter(txhousing, is.na(sales)) %>% count(city)
+```
 
 #### 6. Looking at only the cities and months with greater than 500 sales:
 
 ##### a. Are the distributions of the median sales price (column name median), when grouped by city, different? The same? Show your work.
 
+```{r}
+salesgt500 <- filter(txhousing, sales > 500)
+saleslt500 <- filter(txhousing, sales < 500)
+
+ggplot(salesgt500, aes(x=median, y=city)) + geom_point()
+
+ggplot(saleslt500, aes(x=median, y=city)) + geom_point()
+```
+
 ##### b. Any cities that stand out that you’d want to investigate further?
 
+Collin County has only 2 datapoints.
+
 ##### c. Why might we want to filter out all cities and months with sales less than 500?
+
+These cities have less data points and would be less accurate.
