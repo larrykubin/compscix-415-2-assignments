@@ -1,0 +1,13 @@
+---
+title: "COMPSCIX 415.2 Homework 9/Final"
+author: "Larry Kubin"
+date: "April 5, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
